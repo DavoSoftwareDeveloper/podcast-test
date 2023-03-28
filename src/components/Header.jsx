@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Spinner from "./Spinner";
 
-function Header() {
+
+function Header({loading}) {
   return (
     <nav >
       <div >
@@ -10,7 +11,7 @@ function Header() {
             <div className='nav'>
                 <h2 className="font-bold text-cyan-600">Podcaster</h2>
                 <div>
-                <Spinner />
+                {loading && <Spinner/>}
                 <div className="loader"></div> 
                 </div>
             </div>

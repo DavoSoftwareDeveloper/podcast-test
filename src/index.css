@@ -82,3 +82,36 @@ button:focus-visible {
 .hr{
   border-top: 1.5px solid rgb(218, 217, 217)
 }
+.card{
+  display: flex;
+  position:relative;
+  border: 1px solid lightgray;
+  width: 180px;
+  height: auto;
+  gap: 20px;
+  top:100px;
+  margin-bottom: 100px;
+  padding-top: 50px;
+  cursor: pointer;
+}
+.logo{
+  position:absolute;
+  top: -80px;
+  border-radius: 100%;
+  scale: 0.7;
+}
+.grid{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 20px;
+}
+.text-card{
+  line-height: 1.1;
+  font-size:12px;
+}
+.title-card {
+  font-size:14px;
+  line-height: 1.1;
+  margin-bottom: -4px;
+  margin-top: 20px;
+}

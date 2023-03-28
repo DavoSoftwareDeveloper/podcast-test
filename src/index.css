@@ -16,23 +16,22 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #2a87af;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #2a87af;
 }
 
 body {
   margin: 0;
-  display: flex;
   min-width: 320px;
   min-height: 100vh;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 3.3em;
+  line-height: 1;
 }
 
 button {
@@ -65,4 +64,21 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.nav {
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  margin:10px 10px;
+  margin-bottom: -15px;
+}
+.loader {
+  width: 25px;
+  height: 25px;
+  background-color:#2a87af ;
+  border-radius: 100%;
+}
+.hr{
+  border-top: 1.5px solid rgb(218, 217, 217)
 }

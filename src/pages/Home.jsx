@@ -1,48 +1,39 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Header from '../components/Header'
 import Card from '../components/Card'
-import axios from 'axios'
 import Search from '../components/Search'
 
-function Home() {
+function Home({podcasts, loading, productsData, setPodcasts}) {
 
-    const [date, setDate] = useState(localStorage.getItem('date') || "0")
-    const [loading, setLoading] = useState(false)
-    const [podcasts, setPodcasts] = useState(JSON.parse(localStorage.getItem('podcasts')) || [])
 
-    const productsData = async () => {
-        try{
-            setLoading(true)
-            const newDate = new Date()
-            const mili = newDate.getTime()
-            const oneDay = mili + 86400000 
-
-            if (mili >= date ){
-                localStorage.setItem('date', oneDay)
-                const products = await axios.get('https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json')
-                localStorage.setItem('podcasts', JSON.stringify(products.data.feed.entry))
-                setPodcasts(products.data.feed.entry)
-                console.log(products.data.feed.entry)
-                console.log(products.data.feed.entry[0]["im:artist"].label)
-            }
-           
-
-        }catch(err){console.log(err)}
-        setLoading(false)
-    }
-    [0]["im:artist"]
     useEffect(()=>{
         productsData()
     },[])
 
+    const handleSearch = (e) => {
+        e.preventDefault()
+        const searchTerm = e.target.value
+        console.log(searchTerm)
+        const localStorageData = JSON.parse(localStorage.getItem("podcasts"))
+        console.log(localStorageData)
+        const filterSearch = localStorageData.filter( filter => {
+          return  filter["im:artist"].label.indexOf(searchTerm) > 0|| filter["im:name"].label.indexOf(searchTerm) > 0
+        })
+        setPodcasts(filterSearch.length > 0 ? filterSearch : localStorageData)
 
+    }
+
+
+console.log(podcasts)
   return (
     <div>
         <Header loading={loading}/>
-        <Search />
+        <div className='search-container'>
+            <Search handleSearch={handleSearch} />
+        </div>
       <div className="grid">
         {podcasts?.map(item => (
-        <div key={item.id.attributes }>
+        <div key={item.id.attributes["im:id"] }>
         <Card 
             id={item.id.attributes["im:id"]} 
             artist={item["im:artist"].label}

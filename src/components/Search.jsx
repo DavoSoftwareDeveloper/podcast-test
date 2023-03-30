@@ -1,15 +1,13 @@
 import React from 'react'
 
-function Search() {
+function Search({handleSearch}) {
 
-    const handleChange = () => {
 
-    }
 
   return (
-    <div>
-        <button>100</button>
-      <input type="text" onChange={handleChange} placeholder="Fiter Podcasts..."/>
+    <div className='searchDiv'>
+        <button className='btn100'>100</button>
+        <input className='inputSearch' type="text" onChange={handleSearch} placeholder="Fiter Podcasts..."/>
     </div>
   )
 }

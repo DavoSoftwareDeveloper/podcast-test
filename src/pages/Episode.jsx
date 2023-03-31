@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Header from '../components/Header'
 import CardDetail from '../components/CardDetail'
 import { useParams } from 'react-router-dom'
+import { convertText } from '../functions/functions'
 
 function Episode({podcasts}){
 
@@ -22,21 +23,7 @@ function Episode({podcasts}){
     else return title
   }
 
-  function convertText(txtData) {
-    var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-    txtData = txtData.replace(urlRegex, '<a href="$1">$1</a>');
 
-    var urlRegex2 =/(\b(\swww).[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-    txtData = txtData.replace(urlRegex2, ' <a href="$1">$1</a>');
-
-    var urlRegex3 =/(>\swww)/ig;
-    txtData = txtData.replace(urlRegex3, '>www');
-
-    var urlRegex4 =/(\"\swww)/ig;
-    txtData = txtData.replace(urlRegex4, '"http://www');
-
-    return txtData;
-}
   const test = convertText(filterEpisode[0].description)
 
   return  <>

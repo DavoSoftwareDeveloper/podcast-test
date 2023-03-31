@@ -129,12 +129,13 @@ p{
   gap:60px;
   padding-right: 5%;
   padding-left: 2.5%;
-  
 }
+
 
 .cardDetail {
   border: 1px solid lightgray;
   width: auto;
+  max-width: 270px;
   height: auto;
   padding-top: 30px;
   padding-left: 10px;

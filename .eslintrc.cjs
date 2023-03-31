@@ -6,8 +6,8 @@ module.exports = {
 		'es2021': true
 	},
 	'extends': [
-		'eslint:recommended',
-		'plugin:react/recommended'
+		"react-app",
+     	"react-app/jest"
 	],
 	'overrides': [
 	],

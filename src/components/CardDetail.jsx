@@ -1,20 +1,18 @@
-import React,{useState, useEffect} from 'react'
+import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+
 
 function CardDetail({podcasts, podcastDetail}) {
 
   const navigate = useNavigate()
   const {id} = useParams()
 
-
-  const addSummary = () => {
+    const addSummary = (podcasts) => {
     const selectedPod = podcasts.filter(item => item.id.attributes["im:id"] === id)
     const summar = selectedPod[0].summary["label"]
     const arrSummary = summar.split(".")[0]
     return arrSummary+"."
   }
-  useEffect(()=>{
-  },[podcastDetail])
 
   return (
     <div className="cardDetail" onClick={()=> navigate(`/podcast/${+id}`)}>
@@ -26,7 +24,7 @@ function CardDetail({podcasts, podcastDetail}) {
       <p>by {podcastDetail?.results[0].artistName}</p>
       <hr />
       <p className='title-card'>Description:</p>
-      <p>{addSummary()}</p>
+      <p>{addSummary(podcasts)}</p>
   </div>
   )
 }

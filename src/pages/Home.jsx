@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import Header from '../components/Header'
 import Card from '../components/Card'
 import Search from '../components/Search'
-import Podcast from './Podcast'
 
 function Home({podcasts, loading, productsData, setPodcasts, setLoading}) {
 

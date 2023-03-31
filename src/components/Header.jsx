@@ -4,7 +4,7 @@ import Spinner from "./Spinner";
 
 
 function Header({loading}) {
-  
+
   return (
     <nav >
       <div >
@@ -16,7 +16,7 @@ function Header({loading}) {
                 </div>
             </div>
         </Link>
-        <hr className="hr"/>
+        <hr />
       </div>
     </nav>
   )

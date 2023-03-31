@@ -7,13 +7,11 @@ function Episode({podcasts}){
 
   const {id, episodeId} = useParams()
   
-  console.log(useParams())
-  const [podcastDetail, setpodcastDetail] = useState(JSON.parse(localStorage.getItem(`podcastDetail${id}`)) || null)
-  console.log(podcastDetail)
-  const filterPodcasts = podcastDetail.results.filter( episode => episode.artistIds )
-  console.log(filterPodcasts)
+
+  const podcastDetail= JSON.parse(localStorage.getItem(`podcastDetail${id}`)) 
+  const filterPodcasts = podcastDetail?.results.filter( episode => episode.artistIds )
   const filterEpisode = filterPodcasts.filter( episode => episode.trackId === +episodeId)
-  console.log(filterEpisode)
+
 
   const handleTitle = (title) => {
     const barra = title.indexOf("|")
@@ -24,17 +22,27 @@ function Episode({podcasts}){
     else return title
   }
 
-  function replaceURLWithHTMLLinks(text)
-  {
-    var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-    return text.replace(exp,"<a href='$1'>$1</a>"); 
-  }
- const test = replaceURLWithHTMLLinks(filterEpisode[0].description)
+  function convertText(txtData) {
+    var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    txtData = txtData.replace(urlRegex, '<a href="$1">$1</a>');
+
+    var urlRegex2 =/(\b(\swww).[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    txtData = txtData.replace(urlRegex2, ' <a href="$1">$1</a>');
+
+    var urlRegex3 =/(>\swww)/ig;
+    txtData = txtData.replace(urlRegex3, '>www');
+
+    var urlRegex4 =/(\"\swww)/ig;
+    txtData = txtData.replace(urlRegex4, '"http://www');
+
+    return txtData;
+}
+  const test = convertText(filterEpisode[0].description)
 
   return  <>
           <Header />
           <div className="container">
-            <CardDetail podcasts={podcasts}/>
+            <CardDetail podcasts={podcasts} podcastDetail={podcastDetail}/>
             <div className='episodesDescription'>
                 <h2>{handleTitle(filterEpisode[0].trackName)}</h2>
                 <p dangerouslySetInnerHTML={{__html: test}}></p>

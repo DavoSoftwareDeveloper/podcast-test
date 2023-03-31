@@ -11,17 +11,14 @@ function Podcast({loading, setLoading, podcasts}) {
 
     const [date, setDate] = useState(localStorage.getItem(`date${id}`) || "0")
     const [podcastDetail, setpodcastDetail] = useState(JSON.parse(localStorage.getItem(`podcastDetail${id}`)) || null)
+    const filterPodcasts = podcastDetail?.results.filter( episode => episode.artistIds )
 
-
-    console.log(date)
-    console.log(podcastDetail)
-    console.log(id)
 
     const podcastData = async () => {
-      console.log(date)
+
       if ( podcastDetail?.results[0].collectionId === +id) return  
       try{
-            console.log("hello filter")
+
             setLoading(true)
             const newDate = new Date()
             const mili = newDate.getTime()
@@ -30,7 +27,7 @@ function Podcast({loading, setLoading, podcasts}) {
 
 
               if (mili >= date ){
-                console.log("hello filter date")
+
                localStorage.setItem(`date${id}`, oneDay)
             const url = `https://itunes.apple.com/lookup?id=${id}&media=podcast&entity=podcastEpisode`
                   fetch(`https://api.allorigins.win/get?&url=${encodeURIComponent(url)}`)
@@ -42,17 +39,21 @@ function Podcast({loading, setLoading, podcasts}) {
                     .then(data => (
                       localStorage.setItem(`podcastDetail${id}`, data.contents),
                       setpodcastDetail(JSON.parse(data.contents),
+                      setLoading(false)
                       )));                 
                   }        
 
                 }catch(err){console.log(err)}
-                setLoading(false)
+                
     }
 
     useEffect(()=>{
         podcastData()
-
+        return ()=>{
+          setLoading(false)
+        }
     },[])
+
     
     const handleEpisode = (idEpisode) => {
       navigate(`/podcast/${id}/episode/${idEpisode}`)
@@ -86,9 +87,9 @@ function Podcast({loading, setLoading, podcasts}) {
     <>
               <Header loading={loading}/>
               <div className="container">
-                <CardDetail podcasts={podcasts}/>
+                <CardDetail podcasts={podcasts} podcastDetail={podcastDetail}/>
               <div>
-              <div className='episodesCount'>Episodes: <span>{podcastDetail?.resultCount}</span></div>
+              <div className='episodesCount'>Episodes: <span>{podcastDetail?.resultCount -1}</span></div>
               <br/>
               <div className='episodes'>
               <table >
@@ -100,7 +101,7 @@ function Podcast({loading, setLoading, podcasts}) {
                       </tr>
                     </thead>
                     <tbody>
-                      {podcastDetail?.results.map(podcast => {
+                      {filterPodcasts?.map(podcast => {
                         
                         return (
                           <>

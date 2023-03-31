@@ -25,13 +25,11 @@ function App() {
             const products = await axios.get('https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json')
             localStorage.setItem('podcasts', JSON.stringify(products.data.feed.entry))
             setPodcasts(products.data.feed.entry)
-            console.log(products.data.feed.entry)
-            console.log(products.data.feed.entry[0]["im:artist"].label)
+            setLoading(false)
         }
        
 
     }catch(err){console.log(err)}
-    setLoading(false)
 }
 
 	return (

@@ -4,6 +4,7 @@ import Spinner from "./Spinner";
 
 
 function Header({loading}) {
+  
   return (
     <nav >
       <div >
@@ -11,8 +12,7 @@ function Header({loading}) {
             <div className='nav'>
                 <h2 className="font-bold text-cyan-600">Podcaster</h2>
                 <div>
-                {loading && <Spinner/>}
-                <div className="loader"></div> 
+                {loading && <Spinner className="spinner"/>}
                 </div>
             </div>
         </Link>

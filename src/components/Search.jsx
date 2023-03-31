@@ -3,7 +3,6 @@ import React from 'react'
 function Search({handleSearch}) {
 
 
-
   return (
     <div className='searchDiv'>
         <button className='btn100'>100</button>

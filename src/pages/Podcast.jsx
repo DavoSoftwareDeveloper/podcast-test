@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Header from '../components/Header'
 import CardDetail from '../components/CardDetail'
 
@@ -7,7 +7,7 @@ import CardDetail from '../components/CardDetail'
 function Podcast({loading, setLoading, podcasts}) {
 
     const {id} = useParams()
-
+    const navigate = useNavigate()
 
     const [date, setDate] = useState(localStorage.getItem(`date${id}`) || "0")
     const [podcastDetail, setpodcastDetail] = useState(JSON.parse(localStorage.getItem(`podcastDetail${id}`)) || null)
@@ -54,7 +54,9 @@ function Podcast({loading, setLoading, podcasts}) {
 
     },[])
     
-    const handleEpisode = (id) => {console.log( id)}
+    const handleEpisode = (idEpisode) => {
+      navigate(`/podcast/${id}/episode/${idEpisode}`)
+    }
 
     const handleTitle = (title) => {
       const barra = title.indexOf("|")

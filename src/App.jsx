@@ -40,7 +40,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home productsData={productsData} loading={loading} setLoading={setLoading} podcasts={podcasts} setPodcasts={setPodcasts}/>}/>
       <Route path="/podcast/:id" element={<Podcast loading={loading} setLoading={setLoading} podcasts={podcasts}/>}/>
-      <Route path="/podcast/:id/episode/:episodeId" element={<Episode />}/>
+      <Route path="/podcast/:id/episode/:episodeId" element={<Episode podcasts={podcasts}/>}/>
     </Routes>
     </BrowserRouter>
 		</div>

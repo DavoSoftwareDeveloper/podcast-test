@@ -79,7 +79,7 @@ button:focus-visible {
   background-color:#2a87af ;
   border-radius: 100%;
 }
-.hr{
+hr{
   border-top: 1.5px solid rgb(218, 217, 217)
 }
 .card{
@@ -220,4 +220,14 @@ table{
   align-items: end;
   gap:12px;
   
+}
+.episodesDescription{
+  border: 1px solid lightgray;
+  width: 500px;
+  height: auto;
+  padding:5px;
+}
+.audio{
+  width:100%;
+  height: 30px;
 }
